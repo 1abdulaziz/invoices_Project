@@ -14,7 +14,7 @@ class InvoiceAchiveController extends Controller
     public function index()
     {
         $invoices = invoices::onlyTrashed()->get();
-        return view('Invoices.Archive_Invoices',compact('invoices'));
+        return view('invoices.Archive_Invoices',compact('invoices'));
     }
 
 
@@ -88,6 +88,6 @@ class InvoiceAchiveController extends Controller
          $invoices->forceDelete();
          session()->flash('delete_invoice');
          return redirect('/Archive');
-    
+
     }
 }
