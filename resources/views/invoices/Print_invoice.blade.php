@@ -33,7 +33,7 @@
                 <div class="card card-invoice">
                     <div class="card-body">
                         <div class="invoice-header">
-                            <h1 class="invoice-title">فاتورة تحصيل</h1>
+                            <h1 class="invoice-title">الفاتورة </h1>
                             <div class="billed-from">
                                 <h6>BootstrapDash, Inc.</h6>
                                 <p>201 Something St., Something Town, YT 242, Country 6546<br>
@@ -70,7 +70,9 @@
                                         <th class="wd-20p">#</th>
                                         <th class="wd-40p">المنتج</th>
                                         <th class="tx-center">مبلغ التحصيل</th>
+                                        @if($invoices->Amount_Commission != 1)
                                         <th class="tx-right">مبلغ العمولة</th>
+                                        @endif
                                         <th class="tx-right">الاجمالي</th>
                                     </tr>
                                 </thead>
@@ -79,9 +81,11 @@
                                         <td>1</td>
                                         <td class="tx-12">{{ $invoices->product }}</td>
                                         <td class="tx-center">{{ number_format($invoices->Amount_collection, 2) }}</td>
+                                        @if($invoices->Amount_Commission != 1)
                                         <td class="tx-right">{{ number_format($invoices->Amount_Commission, 2) }}</td>
+                                        @endif
                                         @php
-                                        $total = $invoices->Amount_collection + $invoices->Amount_Commission ;
+                                        $total = $invoices->Amount_collection  ;
                                         @endphp
                                         <td class="tx-right">
                                             {{ number_format($total, 2) }}
@@ -100,7 +104,7 @@
                                     </tr>
                                     <tr>
                                         <td class="tx-right">نسبة الضريبة ({{ $invoices->Rate_VAT }})</td>
-                                        <td class="tx-right" colspan="2">287.50</td>
+                                        <td class="tx-right" colspan="2">{{$invoices->Rate_VAT}}</td>
                                     </tr>
                                     <tr>
                                         <td class="tx-right">قيمة الخصم</td>

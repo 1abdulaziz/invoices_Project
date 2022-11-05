@@ -148,7 +148,11 @@
                                 <input class="form-control fc-datepicker" name="Payment_Date" placeholder="YYYY-MM-DD"
                                     type="text" required>
                             </div>
-
+                            <div class="col">
+                                <label for="inputName" class="control-label">مبلغ السداد</label>
+                                <input type="number" class="form-control" id="Amount" name="Amount"
+                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
 
                         </div><br>
 

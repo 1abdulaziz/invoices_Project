@@ -105,8 +105,13 @@
                                                             <td>{{ $invoices->product }}</td>
                                                             <th scope="row">مبلغ التحصيل</th>
                                                             <td>{{ $invoices->Amount_collection }}</td>
+
+                                                            @if($invoices->Amount_Commission != 1)
                                                             <th scope="row">مبلغ العمولة</th>
                                                             <td>{{ $invoices->Amount_Commission }}</td>
+                                                            @else
+
+                                                            @endif
                                                             <th scope="row">الخصم</th>
                                                             <td>{{ $invoices->Discount }}</td>
                                                         </tr>
