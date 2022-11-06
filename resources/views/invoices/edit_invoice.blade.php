@@ -96,7 +96,7 @@
 
                             <div class="col">
                                 <label for="inputName" class="control-label">مبلغ التحصيل</label>
-                                <input type="text" class="form-control" id="inputName" name="Amount_collection"
+                                <input type="text" class="form-control" id="Amount_collection" name="Amount_collection"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     value="{{ $invoices->Amount_collection }}">
                             </div>
@@ -107,13 +107,7 @@
 
                         <div class="row">
 
-                            <div class="col">
-                                <label for="inputName" class="control-label">مبلغ العمولة</label>
-                                <input type="text" class="form-control form-control-lg" id="Amount_Commission"
-                                    name="Amount_Commission" title="يرجي ادخال مبلغ العمولة "
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    value="{{ $invoices->Amount_Commission }}" required>
-                            </div>
+
 
                             <div class="col">
                                 <label for="inputName" class="control-label">الخصم</label>
@@ -165,6 +159,12 @@
                             <button type="submit" class="btn btn-primary">حفظ البيانات</button>
                         </div>
 
+                        <div class="col">
+                            <input type="hidden" class="form-control form-control-lg" id="Amount_Commission"
+                                   name="Amount_Commission" title="يرجي ادخال مبلغ العمولة "
+                                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                   value=1 required>
+                        </div>
 
                     </form>
                 </div>
@@ -248,6 +248,8 @@
             var Discount = parseFloat(document.getElementById("Discount").value);
             var Rate_VAT = parseFloat(document.getElementById("Rate_VAT").value);
             var Value_VAT = parseFloat(document.getElementById("Value_VAT").value);
+            var Amount_collection = parseFloat(document.getElementById("Amount_collection").value);
+            var TotalWithVat = (Amount_collection * Rate_VAT /100)+Amount_collection - Discount;
 
             var Amount_Commission2 = Amount_Commission - Discount;
 
@@ -257,7 +259,7 @@
                 alert('يرجي ادخال مبلغ العمولة ');
 
             } else {
-                var intResults = Amount_Commission2 * Rate_VAT / 100;
+                var intResults = (Amount_Commission2 * Rate_VAT / 100);
 
                 var intResults2 = parseFloat(intResults + Amount_Commission2);
 
@@ -265,9 +267,9 @@
 
                 sumt = parseFloat(intResults2).toFixed(2);
 
-                document.getElementById("Value_VAT").value = sumq;
+                document.getElementById("Value_VAT").value = sumq*1;
 
-                document.getElementById("Total").value = sumt;
+                document.getElementById("Total").value = TotalWithVat;
 
             }
 

@@ -236,11 +236,12 @@ class InvoicesController extends Controller
         $invoices = invoices::findOrFail($id);
 
         if ($request->Status === 'مدفوعة') {
-
+            $x = $request->Total - $request->Amount;
             $invoices->update([
                 'Value_Status' => 1,
                 'Status' => $request->Status,
                 'Payment_Date' => $request->Payment_Date,
+                'Total' => $x
             ]);
 
             invoices_Details::create([
@@ -257,10 +258,13 @@ class InvoicesController extends Controller
         }
 
         else {
+           $x = $request->Total - $request->Amount;
+
             $invoices->update([
                 'Value_Status' => 3,
                 'Status' => $request->Status,
                 'Payment_Date' => $request->Payment_Date,
+                'Total' => $x
             ]);
             invoices_Details::create([
                 'id_Invoice' => $request->invoice_id,
